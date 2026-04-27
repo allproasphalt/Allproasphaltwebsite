@@ -306,6 +306,74 @@ p, h1, h2, h3 { margin-top: 0; }
   margin: 0;
 }
 
+.section-gallery .section-intro { margin-bottom: 2.5rem; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  min-height: 34rem;
+}
+.gallery-item {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: #0d0d0d;
+  isolation: isolate;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.gallery-item:hover img { transform: scale(1.04); }
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.15) 55%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.gallery-item figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 1.3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.gallery-tag {
+  align-self: flex-start;
+  color: #f2cc63;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(245, 182, 24, 0.14);
+  border: 1px solid rgba(245, 182, 24, 0.35);
+}
+.gallery-caption {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 26rem;
+}
+.gallery-item-lead {
+  grid-row: 1 / span 2;
+}
+
 .split-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -475,6 +543,13 @@ p, h1, h2, h3 { margin-top: 0; }
     grid-template-columns: 1fr;
   }
   .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    min-height: 0;
+  }
+  .gallery-item { aspect-ratio: 4 / 3; }
+  .gallery-item-lead { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 720px) {
@@ -486,6 +561,8 @@ p, h1, h2, h3 { margin-top: 0; }
   .cards-grid {
     grid-template-columns: 1fr;
   }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item-lead { aspect-ratio: 4 / 3; }
   .panel-header,
   .footer-row {
     flex-direction: column;
